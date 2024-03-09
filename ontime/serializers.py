@@ -8,12 +8,8 @@ class OTPSerializer(serializers.ModelSerializer):
         fields = ('phone_number',) 
 
 
-
 class OTPLoginSerializer(serializers.Serializer):
     otp = serializers.CharField(max_length=6)
-
-
-
 
 
 class PANSerializer(serializers.ModelSerializer):
@@ -28,4 +24,19 @@ class PANSerializer(serializers.ModelSerializer):
     class Meta:
         model = PAN
         fields = ('number',)
+
+class ADHARSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=ADHAR
+        fields=('adhar_number',)
+
+class BANKSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=BANK
+        fields=('name','account_number','ifsc')
+
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DOCUMENT
+        fields = ['salary_slip', 'bank_statement']
 

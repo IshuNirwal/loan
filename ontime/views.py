@@ -71,4 +71,40 @@ class PanView(APIView):
             serializer.save(phone_number=phone_number_instance)  
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ADHARView(APIView):
+    def post(self, request):
+        serializer = ADHARSerializer(data=request.data)
+        if serializer.is_valid():
+            phone_number_id = request.data.get('phone_number')  
+            
+            # Fetch the corresponding OTP instance or return 404 if it doesn't exist
+            phone_number_instance = get_object_or_404(OTP, id=phone_number_id) 
+            
+            serializer.save(phone_number=phone_number_instance)  
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class BANKView(APIView):
+    def post(self, request):
+        serializer = BANKSerializer(data=request.data)
+        if serializer.is_valid():
+            phone_number_id = request.data.get('phone_number')  
+            
+            # Fetch the corresponding OTP instance or return 404 if it doesn't exist
+            phone_number_instance = get_object_or_404(OTP, id=phone_number_id) 
+            
+            serializer.save(phone_number=phone_number_instance)  
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class DocumentUploadView(APIView):
+    def post(self, request, format=None):
+        serializer = DocumentSerializer(data=request.data)
+        if serializer.is_valid():
+            phone_number_id = request.data.get('phone_number')
+            phone_number_instance = get_object_or_404(OTP, id=phone_number_id)
+            serializer.save(phone_number=phone_number_instance)
+            return Response({'message': 'Document uploaded successfully'}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
