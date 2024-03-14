@@ -40,3 +40,7 @@ class DocumentSerializer(serializers.ModelSerializer):
         model = DOCUMENT
         fields = ['salary_slip', 'bank_statement']
 
+class ContactEnquirySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ContactEnquiry
+        fields = '__all__'

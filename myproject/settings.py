@@ -8,7 +8,9 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
+
 """
+
 
 from pathlib import Path
 
@@ -39,8 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ontime',
     'rest_framework',
-    'django_otp',
-    
+    'django_otp',    
 ]
 
 MIDDLEWARE = [
@@ -121,17 +122,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+MEDIA_URL='/media/'
+MEDIA_ROOT = BASE_DIR/'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Twilio credentials
-TWILIO_ACCOUNT_SID = 'AC408bdf56fea4da42e5356259b1f5208e'
-TWILIO_AUTH_TOKEN = '20e54bc755426221f9fd4d77911eebf8'
-TWILIO_PHONE_NUMBER = '8279750539'
+# # Twilio credentials
+# TWILIO_ACCOUNT_SID = 'AC408bdf56fea4da42e5356259b1f5208e'
+# TWILIO_AUTH_TOKEN = '20e54bc755426221f9fd4d77911eebf8'
+# TWILIO_PHONE_NUMBER = '8279750539'
 
 
 # Add OTP backend for authentication
@@ -139,3 +141,11 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # To allow authentication with username/password
     'django_otp.backends.OTPBackend',  # To enable OTP authentication
 ]
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER="nirwalriya51@gmail.com"
+EMAIL_HOST_PASSWORD="tdriimpmokizolbf"

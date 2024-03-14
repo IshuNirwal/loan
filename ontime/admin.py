@@ -26,3 +26,13 @@ class DOCAdmin(admin.ModelAdmin):
     list_display = ('id','salary_slip','bank_statement','phone_number')  
 
 admin.site.register(DOCUMENT, DOCAdmin)
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display=('id','name1','name2','email','message','phone')
+
+admin.site.register(ContactEnquiry,ContactAdmin)
+
+class AboutAdmin(admin.ModelAdmin):
+    list_display=('id','image','text')
+
+admin.site.register(About,AboutAdmin)

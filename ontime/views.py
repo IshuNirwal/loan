@@ -8,6 +8,8 @@ from rest_framework import status
 from django.utils import timezone
 from datetime import timedelta
 from rest_framework.generics import get_object_or_404
+from django.core.mail import send_mail
+
 
 
 class OTPGenerationView(APIView):
@@ -108,3 +110,23 @@ class DocumentUploadView(APIView):
             serializer.save(phone_number=phone_number_instance)
             return Response({'message': 'Document uploaded successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class ContactEnquiryView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = ContactEnquirySerializer(data=request.data)
+        if serializer.is_valid():
+            # Save the enquiry
+            enquiry = serializer.save()
+
+            # Send email to support mail
+            subject = "Kasar Services"
+            message = "Thank you for contacting us! We've received your message and will be in touch shortly."
+            from_email = "nirwalriya51@gmail.com" 
+            to_email = enquiry.email 
+            send_mail(subject, message, from_email, [to_email])
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    

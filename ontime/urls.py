@@ -8,5 +8,5 @@ urlpatterns = [
     path('adhar/',ADHARView.as_view(),name='adhar'),
     path('bank/',BANKView.as_view(),name='bank'),
     path('doc/',DocumentUploadView.as_view(),name='doc'),
-
+    path('contact/',ContactEnquiryView.as_view(),name='contact'),
 ]
